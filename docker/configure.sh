@@ -8,21 +8,13 @@ step() {
 
 
 step 'Set up timezone'
-setup-timezone -z Asia/Jakarta
+setup-timezone -z Europe/Prague
 
 step 'Set up networking'
 cat > /etc/network/interfaces <<-EOF
 	iface lo inet loopback
-	iface eth0 inet static
-		address 192.168.4.5
-		netmask 255.255.255.0
-		gateway 192.168.4.1
+	iface eth0 inet dhcp
 EOF
-
-step 'Set up DNS'
-echo "nameserver 1.1.1.1" > /etc/resolv.conf
-
-
 ln -s networking /etc/init.d/net.lo
 ln -s networking /etc/init.d/net.eth0
 
